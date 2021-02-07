@@ -30,7 +30,7 @@ function setup(){
 // Moving background
 path=createSprite(200,200);
 path.addImage(pathImg);
-//path.velocityY = 4;
+path.velocityY = -(4+treasure/100);
 
 
 //creating boy running
