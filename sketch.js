@@ -6,6 +6,7 @@ var path,boy,cash,diamonds,jwellery,sword;
 var pathImg,boyImg,cashImg,diamondsImg,jwelleryImg,swordImg;
 var treasureCollection = 0;
 var cashG,diamondsG,jwelleryG,swordGroup;
+var spike1,spike2;
 
 function preload(){
   pathImg = loadImage("Road.png");
@@ -20,6 +21,7 @@ function preload(){
 //making gamestates
 var PLAY = 1;
 var END = 0;
+var life = 5;
 var gameState = 1;
 var treasureCollection = 0;
 
@@ -30,10 +32,13 @@ function setup(){
 // Moving background
 path=createSprite(200,200);
 path.addImage(pathImg);
-path.velocityY = -(4+treasure/100);
+//path.velocityY = 4;
 
-
-//creating boy running
+//creating spikes
+  spike1 = createSprite(398,200,8,100);
+  spike2 = createSprite(5,200,8,100);
+  
+//creating boy running(
 boy = createSprite(70,330,20,20);
 boy.addAnimation("SahilRunning",boyImg);
 boy.scale=0.08;
@@ -61,6 +66,11 @@ function draw() {
   }
     path.velocityY = 4;
   
+    // code for reducing life 
+    if(boy.isTouching(spike1)|| boy.isTouching(spike2){
+       life = 0;
+       }
+       
       //incrementing treasure collection.
 if (cashG.isTouching(boy)) {
       cashG.destroyEach();
@@ -74,7 +84,7 @@ if (cashG.isTouching(boy)) {
       jwelleryG.destroyEach();
       treasureCollection = treasureCollection + 150;
       //CODE FOR GAME OVER.
-    }else if  (swordGroup.isTouching(boy)) {
+    }else if  (swordGroup.isTouching(boy) || life = 0) {
         swordGroup.destroyEach();
       gameState = END;
       }
@@ -82,6 +92,10 @@ if (cashG.isTouching(boy)) {
   fill(255);
   //show score
   text("Treasure: "+ treasureCollection,100,30);
+    
+    //show lives
+   text("lives: 5",180,30);
+    
 
     createCash();
     createDiamonds();
@@ -113,8 +127,8 @@ if (cashG.isTouching(boy)) {
   
   
   
-  //displaying treasureCollection
-//  text("treasureCollection: "+ treasureCollection, 500,50);
+ //displaying treasureCollection
+ text("treasureCollection: "+ treasureCollection, 500,50);
   
 
   drawSprites();
